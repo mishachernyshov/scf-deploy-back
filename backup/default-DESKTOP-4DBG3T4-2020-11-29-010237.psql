@@ -1,0 +1,1961 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.0
+-- Dumped by pg_dump version 13.0
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co;
+ALTER TABLE ONLY public.authtoken_token DROP CONSTRAINT authtoken_token_user_id_35299eff_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm;
+ALTER TABLE ONLY public.api_webstorecomponent DROP CONSTRAINT api_webstorecomponent_web_store_id_eb39612c_fk;
+ALTER TABLE ONLY public.api_webstorecomponent DROP CONSTRAINT api_webstorecomponent_component_id_315c4d26_fk;
+ALTER TABLE ONLY public.api_constructionreport DROP CONSTRAINT api_constructionreport_construction_id_17e51683_fk;
+ALTER TABLE ONLY public.api_constructionreport DROP CONSTRAINT api_constructionreport_author_id_3238cf63_fk_auth_user_id;
+ALTER TABLE ONLY public.api_constructioncomponent DROP CONSTRAINT api_constructioncomponent_construction_id_6115d8c5_fk;
+ALTER TABLE ONLY public.api_constructioncomponent DROP CONSTRAINT api_constructioncomponent_component_id_8c1c59e3_fk;
+ALTER TABLE ONLY public.api_componentreport DROP CONSTRAINT api_componentreport_component_id_d9d9fd6a_fk;
+ALTER TABLE ONLY public.api_componentreport DROP CONSTRAINT api_componentreport_author_id_c2527203_fk_auth_user_id;
+ALTER TABLE ONLY public.api_cart DROP CONSTRAINT api_cart_user_id_79972181_fk_auth_user_id;
+ALTER TABLE ONLY public.api_cart DROP CONSTRAINT api_cart_construction_id_1b2c9eaf_fk;
+DROP INDEX public.django_session_session_key_c0390e0f_like;
+DROP INDEX public.django_session_expire_date_a5c62663;
+DROP INDEX public.django_admin_log_user_id_c564eba6;
+DROP INDEX public.django_admin_log_content_type_id_c4bce8eb;
+DROP INDEX public.authtoken_token_key_10f0b77e_like;
+DROP INDEX public.auth_user_username_6821ab7c_like;
+DROP INDEX public.auth_user_user_permissions_user_id_a95ead1b;
+DROP INDEX public.auth_user_user_permissions_permission_id_1fbb5f2c;
+DROP INDEX public.auth_user_groups_user_id_6a12ed8b;
+DROP INDEX public.auth_user_groups_group_id_97559544;
+DROP INDEX public.auth_permission_content_type_id_2f476e4b;
+DROP INDEX public.auth_group_permissions_permission_id_84c5c92e;
+DROP INDEX public.auth_group_permissions_group_id_b120cbf9;
+DROP INDEX public.auth_group_name_a6ea08ec_like;
+DROP INDEX public.api_webstorecomponent_web_store_id_id_1d8a446f;
+DROP INDEX public.api_webstorecomponent_component_id_id_0ac30f62;
+DROP INDEX public.api_constructionreport_construction_id_id_3b386a7b;
+DROP INDEX public.api_constructionreport_author_id_3238cf63;
+DROP INDEX public.api_constructioncomponent_construction_id_id_94dd8263;
+DROP INDEX public.api_constructioncomponent_component_id_id_d4294a99;
+DROP INDEX public.api_componentreport_component_id_id_5ef7150a;
+DROP INDEX public.api_componentreport_author_id_c2527203;
+DROP INDEX public.api_cart_user_id_id_cf86ee80;
+DROP INDEX public.api_cart_construction_id_id_b75edcae;
+ALTER TABLE ONLY public.django_session DROP CONSTRAINT django_session_pkey;
+ALTER TABLE ONLY public.django_migrations DROP CONSTRAINT django_migrations_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_pkey;
+ALTER TABLE ONLY public.django_content_type DROP CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq;
+ALTER TABLE ONLY public.django_admin_log DROP CONSTRAINT django_admin_log_pkey;
+ALTER TABLE ONLY public.authtoken_token DROP CONSTRAINT authtoken_token_user_id_key;
+ALTER TABLE ONLY public.authtoken_token DROP CONSTRAINT authtoken_token_pkey;
+ALTER TABLE ONLY public.auth_user DROP CONSTRAINT auth_user_username_key;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq;
+ALTER TABLE ONLY public.auth_user_user_permissions DROP CONSTRAINT auth_user_user_permissions_pkey;
+ALTER TABLE ONLY public.auth_user DROP CONSTRAINT auth_user_pkey;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq;
+ALTER TABLE ONLY public.auth_user_groups DROP CONSTRAINT auth_user_groups_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_pkey;
+ALTER TABLE ONLY public.auth_permission DROP CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_pkey;
+ALTER TABLE ONLY public.auth_group_permissions DROP CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq;
+ALTER TABLE ONLY public.auth_group DROP CONSTRAINT auth_group_name_key;
+ALTER TABLE ONLY public.api_webstorecomponent DROP CONSTRAINT api_webstorecomponent_pkey;
+ALTER TABLE ONLY public.api_webstore DROP CONSTRAINT api_webstore_pkey;
+ALTER TABLE ONLY public.api_constructionreport DROP CONSTRAINT api_constructionreport_pkey;
+ALTER TABLE ONLY public.api_constructioncomponent DROP CONSTRAINT api_constructioncomponent_pkey;
+ALTER TABLE ONLY public.api_constructioncomponent DROP CONSTRAINT api_constructioncomponen_component_id_constructio_acce106a_uniq;
+ALTER TABLE ONLY public.api_componentreport DROP CONSTRAINT api_componentreport_pkey;
+ALTER TABLE ONLY public.api_component DROP CONSTRAINT api_component_pkey;
+ALTER TABLE ONLY public.api_cart DROP CONSTRAINT api_cart_pkey;
+ALTER TABLE ONLY public.api_assembledconstruction DROP CONSTRAINT api_assembledconstruction_pkey;
+ALTER TABLE public.django_migrations ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_content_type ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.django_admin_log ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user_user_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user_groups ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_user ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_permission ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group_permissions ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.auth_group ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_webstorecomponent ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_webstore ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_constructionreport ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_constructioncomponent ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_componentreport ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_component ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_cart ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE public.api_assembledconstruction ALTER COLUMN id DROP DEFAULT;
+DROP TABLE public.django_session;
+DROP SEQUENCE public.django_migrations_id_seq;
+DROP TABLE public.django_migrations;
+DROP SEQUENCE public.django_content_type_id_seq;
+DROP TABLE public.django_content_type;
+DROP SEQUENCE public.django_admin_log_id_seq;
+DROP TABLE public.django_admin_log;
+DROP TABLE public.authtoken_token;
+DROP SEQUENCE public.auth_user_user_permissions_id_seq;
+DROP TABLE public.auth_user_user_permissions;
+DROP SEQUENCE public.auth_user_id_seq;
+DROP SEQUENCE public.auth_user_groups_id_seq;
+DROP TABLE public.auth_user_groups;
+DROP TABLE public.auth_user;
+DROP SEQUENCE public.auth_permission_id_seq;
+DROP TABLE public.auth_permission;
+DROP SEQUENCE public.auth_group_permissions_id_seq;
+DROP TABLE public.auth_group_permissions;
+DROP SEQUENCE public.auth_group_id_seq;
+DROP TABLE public.auth_group;
+DROP SEQUENCE public.api_webstorecomponent_id_seq;
+DROP TABLE public.api_webstorecomponent;
+DROP SEQUENCE public.api_webstore_id_seq;
+DROP TABLE public.api_webstore;
+DROP SEQUENCE public.api_constructionreport_id_seq;
+DROP TABLE public.api_constructionreport;
+DROP SEQUENCE public.api_constructioncomponent_id_seq;
+DROP TABLE public.api_constructioncomponent;
+DROP SEQUENCE public.api_componentreport_id_seq;
+DROP TABLE public.api_componentreport;
+DROP SEQUENCE public.api_component_id_seq;
+DROP TABLE public.api_component;
+DROP SEQUENCE public.api_cart_id_seq;
+DROP TABLE public.api_cart;
+DROP SEQUENCE public.api_assembledconstruction_id_seq;
+DROP TABLE public.api_assembledconstruction;
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: api_assembledconstruction; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_assembledconstruction (
+    id integer NOT NULL,
+    image character varying(100) NOT NULL,
+    rating integer NOT NULL,
+    schema character varying(100) NOT NULL,
+    assemble_instruction character varying(100) NOT NULL,
+    name character varying(300) NOT NULL,
+    type character varying(30),
+    description text
+);
+
+
+ALTER TABLE public.api_assembledconstruction OWNER TO postgres;
+
+--
+-- Name: api_assembledconstruction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_assembledconstruction_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_assembledconstruction_id_seq OWNER TO postgres;
+
+--
+-- Name: api_assembledconstruction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_assembledconstruction_id_seq OWNED BY public.api_assembledconstruction.id;
+
+
+--
+-- Name: api_cart; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_cart (
+    id integer NOT NULL,
+    construction_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.api_cart OWNER TO postgres;
+
+--
+-- Name: api_cart_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_cart_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_cart_id_seq OWNER TO postgres;
+
+--
+-- Name: api_cart_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_cart_id_seq OWNED BY public.api_cart.id;
+
+
+--
+-- Name: api_component; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_component (
+    id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    image character varying(100) NOT NULL,
+    description text NOT NULL,
+    manufacturer character varying(25) NOT NULL,
+    rating integer NOT NULL,
+    category character varying(25) NOT NULL,
+    type character varying(30) NOT NULL,
+    weight integer NOT NULL
+);
+
+
+ALTER TABLE public.api_component OWNER TO postgres;
+
+--
+-- Name: api_component_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_component_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_component_id_seq OWNER TO postgres;
+
+--
+-- Name: api_component_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_component_id_seq OWNED BY public.api_component.id;
+
+
+--
+-- Name: api_componentreport; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_componentreport (
+    id integer NOT NULL,
+    author_id integer NOT NULL,
+    publication_date timestamp with time zone NOT NULL,
+    text text NOT NULL,
+    component_id integer NOT NULL
+);
+
+
+ALTER TABLE public.api_componentreport OWNER TO postgres;
+
+--
+-- Name: api_componentreport_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_componentreport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_componentreport_id_seq OWNER TO postgres;
+
+--
+-- Name: api_componentreport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_componentreport_id_seq OWNED BY public.api_componentreport.id;
+
+
+--
+-- Name: api_constructioncomponent; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_constructioncomponent (
+    id integer NOT NULL,
+    component_id integer NOT NULL,
+    construction_id integer NOT NULL
+);
+
+
+ALTER TABLE public.api_constructioncomponent OWNER TO postgres;
+
+--
+-- Name: api_constructioncomponent_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_constructioncomponent_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_constructioncomponent_id_seq OWNER TO postgres;
+
+--
+-- Name: api_constructioncomponent_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_constructioncomponent_id_seq OWNED BY public.api_constructioncomponent.id;
+
+
+--
+-- Name: api_constructionreport; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_constructionreport (
+    id integer NOT NULL,
+    author_id integer NOT NULL,
+    publication_date timestamp with time zone NOT NULL,
+    text text NOT NULL,
+    construction_id integer NOT NULL
+);
+
+
+ALTER TABLE public.api_constructionreport OWNER TO postgres;
+
+--
+-- Name: api_constructionreport_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_constructionreport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_constructionreport_id_seq OWNER TO postgres;
+
+--
+-- Name: api_constructionreport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_constructionreport_id_seq OWNED BY public.api_constructionreport.id;
+
+
+--
+-- Name: api_webstore; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_webstore (
+    id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    logo character varying(100) NOT NULL,
+    homepage character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.api_webstore OWNER TO postgres;
+
+--
+-- Name: api_webstore_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_webstore_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_webstore_id_seq OWNER TO postgres;
+
+--
+-- Name: api_webstore_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_webstore_id_seq OWNED BY public.api_webstore.id;
+
+
+--
+-- Name: api_webstorecomponent; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_webstorecomponent (
+    id integer NOT NULL,
+    price numeric(20,2) NOT NULL,
+    component_page_link character varying(200) NOT NULL,
+    component_id integer NOT NULL,
+    web_store_id integer NOT NULL
+);
+
+
+ALTER TABLE public.api_webstorecomponent OWNER TO postgres;
+
+--
+-- Name: api_webstorecomponent_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_webstorecomponent_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_webstorecomponent_id_seq OWNER TO postgres;
+
+--
+-- Name: api_webstorecomponent_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_webstorecomponent_id_seq OWNED BY public.api_webstorecomponent.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: authtoken_token; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.authtoken_token (
+    key character varying(40) NOT NULL,
+    created timestamp with time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.authtoken_token OWNER TO postgres;
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: api_assembledconstruction id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_assembledconstruction ALTER COLUMN id SET DEFAULT nextval('public.api_assembledconstruction_id_seq'::regclass);
+
+
+--
+-- Name: api_cart id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_cart ALTER COLUMN id SET DEFAULT nextval('public.api_cart_id_seq'::regclass);
+
+
+--
+-- Name: api_component id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_component ALTER COLUMN id SET DEFAULT nextval('public.api_component_id_seq'::regclass);
+
+
+--
+-- Name: api_componentreport id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_componentreport ALTER COLUMN id SET DEFAULT nextval('public.api_componentreport_id_seq'::regclass);
+
+
+--
+-- Name: api_constructioncomponent id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructioncomponent ALTER COLUMN id SET DEFAULT nextval('public.api_constructioncomponent_id_seq'::regclass);
+
+
+--
+-- Name: api_constructionreport id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructionreport ALTER COLUMN id SET DEFAULT nextval('public.api_constructionreport_id_seq'::regclass);
+
+
+--
+-- Name: api_webstore id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_webstore ALTER COLUMN id SET DEFAULT nextval('public.api_webstore_id_seq'::regclass);
+
+
+--
+-- Name: api_webstorecomponent id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_webstorecomponent ALTER COLUMN id SET DEFAULT nextval('public.api_webstorecomponent_id_seq'::regclass);
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Data for Name: api_assembledconstruction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_assembledconstruction (id, image, rating, schema, assemble_instruction, name, type, description) FROM stdin;
+1	constructionsImages/7_600w.jpg	7	schemas/7_600w.jpg	instructions/1.txt	Стілець IKEA MARIUS	Стілець	At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?\r\nAt vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?\r\nAt vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?
+2	constructionsImages/7_600w_ZKdDVER.jpg	9	schemas/7_600w_RYJgWTL.jpg	instructions/7_600w.jpg	Стілець IKEA COPIUS	Стілець	At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?\r\nAt vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat? At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur. Itaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?
+\.
+
+
+--
+-- Data for Name: api_cart; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_cart (id, construction_id, user_id) FROM stdin;
+4528264	1	5
+4528351	2	1
+4528344	1	4
+4528317	2	4
+\.
+
+
+--
+-- Data for Name: api_component; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_component (id, name, image, description, manufacturer, rating, category, type, weight) FROM stdin;
+2	Спинка IKEA FFF	componentImages/standLeg_w9WTJ0l.png	At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur.\r\nItaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat?	IKEA	4	Спинка	Спинка для стільця	3
+3	Сидіння IKEA Sit R	componentImages/standLeg_Fn4AssM.png	Duis aute irure dolor in reprehenderit in voluptate, nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.	IKEA	4	Сидіння	Сидіння для стільця	5
+4	Шуруп Intoco Fav S	componentImages/standLeg_fk0UWHf.png	Duis aute irure dolor in reprehenderit in voluptate, nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.	ScrewsKit	6	Шуруп	Шуруп універсальний	1
+5	Ніжка IKEA Professional leg	componentImages/standLeg_vVWzkvw.png	Duis aute irure dolor in reprehenderit in voluptate, nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.	IKEA	10	Ніжка	Ніжка для стільця	3
+1	Ніжка IKEA Standard leg	componentImages/standLeg.png	At vero eos et accusamus et iusto odio dignissimos ducimus, consectetur adipiscing elit, qui dolorem eum fugiat, quo voluptas nulla pariatur.\r\nItaque earum rerum hic tenetur a sapiente delectus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. \r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui.	IKEA	8	Ніжка	Ніжка для стільця	2
+\.
+
+
+--
+-- Data for Name: api_componentreport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_componentreport (id, author_id, publication_date, text, component_id) FROM stdin;
+1	1	2020-11-18 13:52:54.763412+02	Чудова ніжка	1
+2	4	2020-11-25 19:27:20.333124+02	asddddddddddddddd	2
+\.
+
+
+--
+-- Data for Name: api_constructioncomponent; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_constructioncomponent (id, component_id, construction_id) FROM stdin;
+3	1	1
+4	2	1
+5	3	1
+6	4	1
+7	2	2
+8	3	2
+9	4	2
+10	5	2
+\.
+
+
+--
+-- Data for Name: api_constructionreport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_constructionreport (id, author_id, publication_date, text, construction_id) FROM stdin;
+1	4	2020-11-18 13:46:47.017959+02	Чудовий стілець	1
+3	5	2020-11-18 13:47:34.33317+02	Нарікань немає	2
+2	5	2020-11-18 13:47:11.455649+02	Ненадійна конструкція	1
+4	4	2020-11-25 17:11:35.010887+02	Гарний стілець	1
+7	4	2020-11-25 17:42:24.281504+02	Гарний стілець	1
+11	4	2020-11-25 17:49:16.927838+02	Відгучок	2
+12	4	2020-11-25 17:51:48.870435+02	Нарікання будуть!	2
+13	4	2020-11-25 18:14:43.844452+02	не треба більше відгуків	2
+\.
+
+
+--
+-- Data for Name: api_webstore; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_webstore (id, name, logo, homepage) FROM stdin;
+1	SmartStore	69328051-furniture-store-logo-.jpg	https://www.django-rest-framework.org/api-guide/serializers/
+2	FurniStore	69328051-furniture-store-logo-_wP8fZ7t.jpg	https://www.django-rest-framework.org/api-guide/serializers/
+3	Fotel	69328051-furniture-store-logo-_xOi2uIT.jpg	https://fotel.com.ua/
+\.
+
+
+--
+-- Data for Name: api_webstorecomponent; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_webstorecomponent (id, price, component_page_link, component_id, web_store_id) FROM stdin;
+2	213.00	http://127.0.0.1:8000/api/webstore_component/	2	1
+3	254.00	http://127.0.0.1:8000/api/webstore_component/	2	2
+4	777.00	http://127.0.0.1:8000/api/webstore_component/	2	3
+5	212.00	http://127.0.0.1:8000/api/webstore_component/	1	1
+6	262.00	http://127.0.0.1:8000/api/webstore_component/	1	3
+7	262.00	http://127.0.0.1:8000/api/webstore_component/	3	2
+8	192.00	http://127.0.0.1:8000/api/webstore_component/	3	3
+\.
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add web service visitor	7	add_webservicevisitor
+26	Can change web service visitor	7	change_webservicevisitor
+27	Can delete web service visitor	7	delete_webservicevisitor
+28	Can view web service visitor	7	view_webservicevisitor
+29	Can add component report	8	add_componentreport
+30	Can change component report	8	change_componentreport
+31	Can delete component report	8	delete_componentreport
+32	Can view component report	8	view_componentreport
+33	Can add assembled construction	9	add_assembledconstruction
+34	Can change assembled construction	9	change_assembledconstruction
+35	Can delete assembled construction	9	delete_assembledconstruction
+36	Can view assembled construction	9	view_assembledconstruction
+37	Can add web store	10	add_webstore
+38	Can change web store	10	change_webstore
+39	Can delete web store	10	delete_webstore
+40	Can view web store	10	view_webstore
+41	Can add construction component	11	add_constructioncomponent
+42	Can change construction component	11	change_constructioncomponent
+43	Can delete construction component	11	delete_constructioncomponent
+44	Can view construction component	11	view_constructioncomponent
+45	Can add construction report	12	add_constructionreport
+46	Can change construction report	12	change_constructionreport
+47	Can delete construction report	12	delete_constructionreport
+48	Can view construction report	12	view_constructionreport
+49	Can add component	13	add_component
+50	Can change component	13	change_component
+51	Can delete component	13	delete_component
+52	Can view component	13	view_component
+53	Can add web store component	14	add_webstorecomponent
+54	Can change web store component	14	change_webstorecomponent
+55	Can delete web store component	14	delete_webstorecomponent
+56	Can view web store component	14	view_webstorecomponent
+57	Can add Token	15	add_token
+58	Can change Token	15	change_token
+59	Can delete Token	15	delete_token
+60	Can view Token	15	view_token
+61	Can add token	16	add_tokenproxy
+62	Can change token	16	change_tokenproxy
+63	Can delete token	16	delete_tokenproxy
+64	Can view token	16	view_tokenproxy
+65	Can add user	17	add_useraccount
+66	Can change user	17	change_useraccount
+67	Can delete user	17	delete_useraccount
+68	Can view user	17	view_useraccount
+69	Can add cart	18	add_cart
+70	Can change cart	18	change_cart
+71	Can delete cart	18	delete_cart
+72	Can view cart	18	view_cart
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+2	pbkdf2_sha256$216000$ifvPdHRQqevH$nMPOJS2vDRF9IE5Aaf/Egv2WKFmFqVH2Mwu016el0Yg=	2020-11-14 00:29:37.057763+02	f	Misha_Chernyshov				f	t	2020-11-13 19:45:34.394996+02
+15	pbkdf2_sha256$216000$gZozQ4zwlOfU$Anc+gpIlC+KVmmOZPAMSbvyCionA76FOG1TlTgvE3DU=	\N	f	jjjjjjjjjjjjjjjjjjw				f	t	2020-11-25 01:01:06.47909+02
+16	pbkdf2_sha256$216000$UgGpWmTJ0etm$5AMVq4vKq5vTkp1dV1fwv17id5WkZfq2HRaZO9Djah4=	\N	f	jjjjjjjjjjjjjjjjjjwt				f	t	2020-11-25 01:01:23.910937+02
+5	pbkdf2_sha256$216000$Zt9KvG2neGLQ$lCbvFC+fqb/hRzbZa1XuDVXMpJg9YTTdxrjgWYkc7e8=	2020-11-25 01:10:50.193901+02	f	test2				f	t	2020-11-14 15:30:35.717722+02
+3	pbkdf2_sha256$216000$JTTVBYR20Zbj$RVk4wvKGfz+wQS22I1HnHvebqrQ+CqUMC42Vio7a9aY=	2020-11-25 01:11:18.969016+02	f	usr				f	t	2020-11-13 23:37:50+02
+4	pbkdf2_sha256$216000$USNkQdN9NWgI$M9QwKUOxUp1VUfh41zYcPkVoCOdsZQzEN1SIzlWRoas=	2020-11-25 10:06:05.174902+02	f	test1				f	t	2020-11-14 15:28:16.8211+02
+17	pbkdf2_sha256$216000$LMTyld4WRLIr$NHiwoCW3JlJyfmFv9JuyB5xHvMcoaDA/yboFe5OOsiw=	\N	f	pipin				f	t	2020-11-27 18:07:32.419556+02
+18	pbkdf2_sha256$216000$BY5Cw88v9luj$PIx2j2e/FtxQbjigCbMqy9SP8sGhyszVa7XFUbaX9p0=	\N	f	zzzzzzzz				f	t	2020-11-27 18:08:00.312573+02
+1	pbkdf2_sha256$216000$OGLi4FawG0ea$kK494CbsmE1HtYH0i+RVBl+vuhxaG4H0k2ZmUZfL8Dk=	2020-11-28 23:14:30.98065+02	t	misha			mishachernyshov2@gmail.com	t	t	2020-11-11 21:49:10.215063+02
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: authtoken_token; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.authtoken_token (key, created, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2020-11-11 22:56:14.913948+02	1	WebStore object (1)	1	[{"added": {}}]	10	1
+2	2020-11-12 18:33:14.459395+02	1	Component object (1)	2	[{"changed": {"fields": ["Image"]}}]	13	1
+3	2020-11-12 18:35:59.393954+02	1	Component object (1)	2	[{"changed": {"fields": ["Image"]}}]	13	1
+4	2020-11-12 23:34:14.193568+02	1	Component object (1)	2	[{"changed": {"fields": ["Image"]}}]	13	1
+5	2020-11-12 23:34:28.915632+02	1	Component object (1)	2	[{"changed": {"fields": ["Image"]}}]	13	1
+6	2020-11-13 12:23:39.633119+02	231	WebServiceVisitor object (231)	1	[{"added": {}}]	7	1
+7	2020-11-13 13:08:54.006788+02	231	WebServiceVisitor object (231)	3		7	1
+8	2020-11-13 23:37:50.233128+02	3	usr	1	[{"added": {}}]	4	1
+9	2020-11-13 23:38:57.094517+02	3	usr	2	[{"changed": {"fields": ["Staff status"]}}]	4	1
+10	2020-11-13 23:39:11.809905+02	3	usr	2	[{"changed": {"fields": ["Staff status"]}}]	4	1
+11	2020-11-13 23:48:52.579652+02	3	usr	2	[{"changed": {"fields": ["Staff status", "Superuser status"]}}]	4	1
+12	2020-11-14 15:28:17.366812+02	4	test1	1	[{"added": {}}]	4	1
+13	2020-11-14 15:30:35.900723+02	5	test2	1	[{"added": {}}]	4	1
+14	2020-11-14 15:44:13.925313+02	3	usr	2	[{"changed": {"fields": ["Staff status", "Superuser status"]}}]	4	1
+15	2020-11-15 16:59:37.124373+02	1	AssembledConstruction object (1)	2	[{"changed": {"fields": ["Image"]}}]	9	1
+16	2020-11-20 18:27:12.212343+02	6	tttt	3		4	1
+17	2020-11-20 20:34:54.091184+02	8	ttttqw	3		4	1
+18	2020-11-20 20:34:59.120153+02	7	tttt	3		4	1
+19	2020-11-20 21:25:00.388666+02	9	ttttqw	3		4	1
+20	2020-11-20 21:25:06.90491+02	10	ttttqw3	3		4	1
+21	2020-11-25 00:39:56.953227+02	11	jjjjjjjjjjjjjjjjjj	3		4	1
+22	2020-11-25 00:41:22.116788+02	12	fffffffffffffffff	3		4	1
+23	2020-11-25 01:00:28.256533+02	13	afsdfsdfsfd	3		4	1
+24	2020-11-25 01:00:33.742294+02	14	jjjjjjjjjjjjjjjjjj	3		4	1
+25	2020-11-25 17:48:40.985092+02	10	ConstructionReport object (10)	3		12	1
+26	2020-11-25 17:48:47.599386+02	9	ConstructionReport object (9)	3		12	1
+27	2020-11-25 17:48:52.437112+02	8	ConstructionReport object (8)	3		12	1
+28	2020-11-25 17:49:00.861641+02	6	ConstructionReport object (6)	3		12	1
+29	2020-11-28 11:10:32.873463+02	1	Component object (1)	2	[{"changed": {"fields": ["Description"]}}]	13	1
+30	2020-11-28 11:10:41.833059+02	1	Component object (1)	2	[{"changed": {"fields": ["Description"]}}]	13	1
+31	2020-11-28 11:10:52.31753+02	1	Component object (1)	2	[{"changed": {"fields": ["Description"]}}]	13	1
+32	2020-11-28 11:18:15.608688+02	1	AssembledConstruction object (1)	2	[{"changed": {"fields": ["Description"]}}]	9	1
+33	2020-11-28 11:18:29.665988+02	2	AssembledConstruction object (2)	2	[{"changed": {"fields": ["Description"]}}]	9	1
+34	2020-11-29 00:00:38.246521+02	4528349	Cart object (4528349)	1	[{"added": {}}]	18	1
+35	2020-11-29 00:00:42.765253+02	4528349	Cart object (4528349)	2	[]	18	1
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	api	webservicevisitor
+8	api	componentreport
+9	api	assembledconstruction
+10	api	webstore
+11	api	constructioncomponent
+12	api	constructionreport
+13	api	component
+14	api	webstorecomponent
+15	authtoken	token
+16	authtoken	tokenproxy
+17	api	useraccount
+18	api	cart
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-11-11 21:14:43.810757+02
+2	auth	0001_initial	2020-11-11 21:14:44.271668+02
+3	admin	0001_initial	2020-11-11 21:14:45.005658+02
+4	admin	0002_logentry_remove_auto_add	2020-11-11 21:14:45.095261+02
+5	admin	0003_logentry_add_action_flag_choices	2020-11-11 21:14:45.104506+02
+6	contenttypes	0002_remove_content_type_name	2020-11-11 21:14:45.127117+02
+7	auth	0002_alter_permission_name_max_length	2020-11-11 21:14:45.139117+02
+8	auth	0003_alter_user_email_max_length	2020-11-11 21:14:45.150116+02
+9	auth	0004_alter_user_username_opts	2020-11-11 21:14:45.160133+02
+10	auth	0005_alter_user_last_login_null	2020-11-11 21:14:45.170134+02
+11	auth	0006_require_contenttypes_0002	2020-11-11 21:14:45.17314+02
+12	auth	0007_alter_validators_add_error_messages	2020-11-11 21:14:45.183135+02
+13	auth	0008_alter_user_username_max_length	2020-11-11 21:14:45.244112+02
+14	auth	0009_alter_user_last_name_max_length	2020-11-11 21:14:45.257115+02
+15	auth	0010_alter_group_name_max_length	2020-11-11 21:14:45.268958+02
+16	auth	0011_update_proxy_permissions	2020-11-11 21:14:45.27895+02
+17	auth	0012_alter_user_first_name_max_length	2020-11-11 21:14:45.290959+02
+18	sessions	0001_initial	2020-11-11 21:14:45.385173+02
+19	api	0001_initial	2020-11-11 21:22:09.411364+02
+20	api	0002_auto_20201112_1831	2020-11-12 18:31:23.659324+02
+21	api	0003_auto_20201112_1835	2020-11-12 18:35:19.629033+02
+22	api	0004_auto_20201113_1217	2020-11-13 12:17:55.466184+02
+23	api	0005_webservicevisitor_password	2020-11-13 13:11:59.801071+02
+24	authtoken	0001_initial	2020-11-13 13:11:59.975071+02
+25	authtoken	0002_auto_20160226_1747	2020-11-13 13:12:00.153073+02
+26	authtoken	0003_tokenproxy	2020-11-13 13:12:00.158077+02
+27	api	0006_auto_20201113_1340	2020-11-13 13:41:05.21992+02
+28	api	0007_delete_webservicevisitor	2020-11-13 14:02:41.16569+02
+29	api	0008_webservicevisitor	2020-11-13 14:02:41.297596+02
+30	api	0009_useraccount	2020-11-13 18:38:16.162869+02
+31	api	0010_auto_20201113_1837	2020-11-13 18:38:16.631867+02
+32	api	0011_auto_20201113_1839	2020-11-13 18:39:21.183638+02
+33	api	0012_delete_useraccount	2020-11-13 19:19:07.76369+02
+34	api	0013_cart	2020-11-13 20:48:56.240818+02
+35	api	0014_auto_20201113_2059	2020-11-13 21:00:00.017177+02
+36	api	0015_auto_20201115_0758	2020-11-15 07:58:43.930902+02
+37	api	0016_remove_cart_count	2020-11-15 11:53:22.796896+02
+38	api	0017_auto_20201115_1321	2020-11-15 13:21:57.175314+02
+39	api	0018_auto_20201122_1720	2020-11-22 17:20:51.364122+02
+40	api	0019_assembledconstruction_description	2020-11-22 19:58:04.228014+02
+41	api	0020_auto_20201122_2006	2020-11-22 20:06:04.427969+02
+42	api	0021_auto_20201125_1039	2020-11-25 10:39:15.460115+02
+43	api	0022_auto_20201126_1652	2020-11-28 11:14:38.000456+02
+44	api	0023_remove_assembledconstruction_description	2020-11-28 11:14:38.111317+02
+45	api	0024_assembledconstruction_description	2020-11-28 11:17:18.215235+02
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+a5dznszdykeii5wcy9x4x2x72u4qqhf2	.eJxVjEEOwiAQRe_C2hAKMoBL9z0DGYapVA0kpV0Z765NutDtf-_9l4i4rSVunZc4Z3ERgzj9bgnpwXUH-Y711iS1ui5zkrsiD9rl2DI_r4f7d1Cwl2-tgJi8P-tsfQA9OcjAYJ1HcjQlzYMhp3TyTtvgAZCBUjDZKKNRURDvD9oON4o:1kj4h5:Ks1cVYOHiAzOIKSOBGEuAXMuqeZaEfBYi0RyN3naXq8	2020-12-12 20:11:35.084479+02
+f9r1uzh7txq7yh3vrnqscb6d6ysy9xfq	.eJxVjEEOwiAQRe_C2hAKMoBL9z0DGYapVA0kpV0Z765NutDtf-_9l4i4rSVunZc4Z3ERgzj9bgnpwXUH-Y711iS1ui5zkrsiD9rl2DI_r4f7d1Cwl2-tgJi8P-tsfQA9OcjAYJ1HcjQlzYMhp3TyTtvgAZCBUjDZKKNRURDvD9oON4o:1kj7Y6:y_0klP9DEF2DtMgdTGHLUWWfIoysLlmWNGmhhMMziBI	2020-12-12 23:14:30.989662+02
+\.
+
+
+--
+-- Name: api_assembledconstruction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_assembledconstruction_id_seq', 2, true);
+
+
+--
+-- Name: api_cart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_cart_id_seq', 4528349, true);
+
+
+--
+-- Name: api_component_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_component_id_seq', 5, true);
+
+
+--
+-- Name: api_componentreport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_componentreport_id_seq', 2, true);
+
+
+--
+-- Name: api_constructioncomponent_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_constructioncomponent_id_seq', 10, true);
+
+
+--
+-- Name: api_constructionreport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_constructionreport_id_seq', 13, true);
+
+
+--
+-- Name: api_webstore_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_webstore_id_seq', 3, true);
+
+
+--
+-- Name: api_webstorecomponent_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_webstorecomponent_id_seq', 8, true);
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 72, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 18, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 35, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 18, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 45, true);
+
+
+--
+-- Name: api_assembledconstruction api_assembledconstruction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_assembledconstruction
+    ADD CONSTRAINT api_assembledconstruction_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_cart api_cart_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_cart
+    ADD CONSTRAINT api_cart_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_component api_component_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_component
+    ADD CONSTRAINT api_component_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_componentreport api_componentreport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_componentreport
+    ADD CONSTRAINT api_componentreport_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_constructioncomponent api_constructioncomponen_component_id_constructio_acce106a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructioncomponent
+    ADD CONSTRAINT api_constructioncomponen_component_id_constructio_acce106a_uniq UNIQUE (component_id, construction_id);
+
+
+--
+-- Name: api_constructioncomponent api_constructioncomponent_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructioncomponent
+    ADD CONSTRAINT api_constructioncomponent_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_constructionreport api_constructionreport_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructionreport
+    ADD CONSTRAINT api_constructionreport_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_webstore api_webstore_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_webstore
+    ADD CONSTRAINT api_webstore_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_webstorecomponent api_webstorecomponent_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_webstorecomponent
+    ADD CONSTRAINT api_webstorecomponent_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: authtoken_token authtoken_token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: authtoken_token authtoken_token_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: api_cart_construction_id_id_b75edcae; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_cart_construction_id_id_b75edcae ON public.api_cart USING btree (construction_id);
+
+
+--
+-- Name: api_cart_user_id_id_cf86ee80; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_cart_user_id_id_cf86ee80 ON public.api_cart USING btree (user_id);
+
+
+--
+-- Name: api_componentreport_author_id_c2527203; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_componentreport_author_id_c2527203 ON public.api_componentreport USING btree (author_id);
+
+
+--
+-- Name: api_componentreport_component_id_id_5ef7150a; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_componentreport_component_id_id_5ef7150a ON public.api_componentreport USING btree (component_id);
+
+
+--
+-- Name: api_constructioncomponent_component_id_id_d4294a99; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_constructioncomponent_component_id_id_d4294a99 ON public.api_constructioncomponent USING btree (component_id);
+
+
+--
+-- Name: api_constructioncomponent_construction_id_id_94dd8263; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_constructioncomponent_construction_id_id_94dd8263 ON public.api_constructioncomponent USING btree (construction_id);
+
+
+--
+-- Name: api_constructionreport_author_id_3238cf63; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_constructionreport_author_id_3238cf63 ON public.api_constructionreport USING btree (author_id);
+
+
+--
+-- Name: api_constructionreport_construction_id_id_3b386a7b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_constructionreport_construction_id_id_3b386a7b ON public.api_constructionreport USING btree (construction_id);
+
+
+--
+-- Name: api_webstorecomponent_component_id_id_0ac30f62; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_webstorecomponent_component_id_id_0ac30f62 ON public.api_webstorecomponent USING btree (component_id);
+
+
+--
+-- Name: api_webstorecomponent_web_store_id_id_1d8a446f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_webstorecomponent_web_store_id_id_1d8a446f ON public.api_webstorecomponent USING btree (web_store_id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: authtoken_token_key_10f0b77e_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX authtoken_token_key_10f0b77e_like ON public.authtoken_token USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: api_cart api_cart_construction_id_1b2c9eaf_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_cart
+    ADD CONSTRAINT api_cart_construction_id_1b2c9eaf_fk FOREIGN KEY (construction_id) REFERENCES public.api_assembledconstruction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_cart api_cart_user_id_79972181_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_cart
+    ADD CONSTRAINT api_cart_user_id_79972181_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_componentreport api_componentreport_author_id_c2527203_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_componentreport
+    ADD CONSTRAINT api_componentreport_author_id_c2527203_fk_auth_user_id FOREIGN KEY (author_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_componentreport api_componentreport_component_id_d9d9fd6a_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_componentreport
+    ADD CONSTRAINT api_componentreport_component_id_d9d9fd6a_fk FOREIGN KEY (component_id) REFERENCES public.api_component(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_constructioncomponent api_constructioncomponent_component_id_8c1c59e3_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructioncomponent
+    ADD CONSTRAINT api_constructioncomponent_component_id_8c1c59e3_fk FOREIGN KEY (component_id) REFERENCES public.api_component(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_constructioncomponent api_constructioncomponent_construction_id_6115d8c5_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructioncomponent
+    ADD CONSTRAINT api_constructioncomponent_construction_id_6115d8c5_fk FOREIGN KEY (construction_id) REFERENCES public.api_assembledconstruction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_constructionreport api_constructionreport_author_id_3238cf63_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructionreport
+    ADD CONSTRAINT api_constructionreport_author_id_3238cf63_fk_auth_user_id FOREIGN KEY (author_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_constructionreport api_constructionreport_construction_id_17e51683_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_constructionreport
+    ADD CONSTRAINT api_constructionreport_construction_id_17e51683_fk FOREIGN KEY (construction_id) REFERENCES public.api_assembledconstruction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_webstorecomponent api_webstorecomponent_component_id_315c4d26_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_webstorecomponent
+    ADD CONSTRAINT api_webstorecomponent_component_id_315c4d26_fk FOREIGN KEY (component_id) REFERENCES public.api_component(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_webstorecomponent api_webstorecomponent_web_store_id_eb39612c_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_webstorecomponent
+    ADD CONSTRAINT api_webstorecomponent_web_store_id_eb39612c_fk FOREIGN KEY (web_store_id) REFERENCES public.api_webstore(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: authtoken_token authtoken_token_user_id_35299eff_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_user_id_35299eff_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
