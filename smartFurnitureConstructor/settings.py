@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     #'sslserver',
     # 'rest_framework.authtoken',
     'dbbackup',
+    'storages',
 
     # Local
     'api.apps.ApiConfig',
@@ -192,14 +193,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+#
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
+#
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static', 'static_dirs'),
+# )
+#
+# MEDIA_URL = '/images/'
+#
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
+DEFAULT_FILE_STORAGE = 'smartFurnitureConstructor.custom_azure.AzureMediaStorage'
+STATICFILES_STORAGE = 'smartFurnitureConstructor.custom_azure.AzureStaticStorage'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static', 'static_dirs'),
-)
+STATIC_LOCATION = "static"
+MEDIA_LOCATION = "media"
 
-MEDIA_URL = '/images/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+AZURE_ACCOUNT_NAME = "smartconstructor"
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
