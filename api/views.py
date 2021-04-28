@@ -251,9 +251,9 @@ class AlmostAppropriateConstructionsForGivenComponents(generics.ListAPIView):
 
 
 def connect_to_database():
-    return psycopg2.connect(user="postgres",
+    return psycopg2.connect(user="misha@smart-furniture-constructor",
                             password="Xpohuc490",
-                            host="127.0.0.1",
+                            host="smart-furniture-constructor.postgres.database.azure.com",
                             port="5432",
                             database="sfc-db")
 
