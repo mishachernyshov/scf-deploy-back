@@ -23,6 +23,9 @@ class Component(models.Model):
     type = models.CharField(max_length=30)
     weight = models.FloatField()
 
+    def __str__(self):
+        return self.name
+
 
 class ComponentReport(models.Model):
     """
@@ -45,6 +48,9 @@ class WebStore(models.Model):
     name = models.CharField(max_length=30)
     logo = models.ImageField()
     homepage = models.URLField()
+
+    def __str__(self):
+        return self.name
 
 
 class WebStoreComponent(models.Model):
@@ -73,6 +79,9 @@ class AssembledConstruction(models.Model):
     assemble_instruction = models.FileField(blank=True, upload_to='instructions/')
     instruction_images = models.FileField(blank=True, upload_to='instructions/')
 
+    def __str__(self):
+        return self.name
+
 
 class ConstructionComponent(models.Model):
     """
@@ -85,6 +94,9 @@ class ConstructionComponent(models.Model):
 
     class Meta:
         unique_together = ('component_id', 'construction_id')
+
+    def __str__(self):
+        return f'{self.component} - {self.construction}'
 
 
 class ConstructionReport(models.Model):
