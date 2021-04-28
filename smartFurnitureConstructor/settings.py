@@ -152,9 +152,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sfc-db',
-        'USER': 'misha@smart-furniture-constructor-server',
+        'USER': 'misha@smart-furniture-constructor',
         'PASSWORD': 'Xpohuc490',
-        'HOST': 'smart-furniture-constructor-server.postgres.database.azure.com',
+        'HOST': 'smart-furniture-constructor.postgres.database.azure.com',
         'PORT': '5432',
     }
 }
@@ -211,7 +211,7 @@ STATICFILES_STORAGE = 'smartFurnitureConstructor.custom_azure.AzureStaticStorage
 STATIC_LOCATION = "static"
 MEDIA_LOCATION = "media"
 
-AZURE_ACCOUNT_NAME = "smartconstructor"
+AZURE_ACCOUNT_NAME = "smartconstructorstorage"
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
